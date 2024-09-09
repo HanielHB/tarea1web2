@@ -1,0 +1,112 @@
+<%- include('../../components/header.ejs') %>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-8 col-sm-10 col-xxl-4">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Formulario de personas</h5>
+                        <form class="needs-validation" method="post" action="">
+                            <% if (errors) { %>
+                                <div class="alert alert-warning">
+                                    <%= errors.message%>
+                                </div>
+                                <% } %>
+                                    <div class="mt-2 has-validation">
+                                        <label>Nombre</label>
+                                        <input required class="form-control" type="text" name="nombre"
+                                            placeholder="Nombre" value="<%=persona && persona.nombre %>">
+                                        <%if (errors?.nombre) {%>
+                                            <div class="error-label">
+                                                Por favor ingrese un nombre
+                                            </div>
+                                            <% } %>
+
+                                    </div>
+                                    <div class="mt-2">
+                                        <label>Apellido</label>
+                                        <input required class="form-control" type="text" name="apellido"
+                                            placeholder="Apellido" value="<%=persona && persona.apellido %>">
+                                        <%if (errors?.apellido) {%>
+
+                                            <div class="error-label">
+                                                Por favor ingrese un apellido
+                                            </div>
+                                            <% } %>
+                                    </div>
+                                    <div class="mt-2">
+                                        <label>Ciudad</label>
+                                        <input required class="form-control" type="text" name="ciudad"
+                                            placeholder="Ciudad" value="<%=persona && persona.ciudad %>">
+                                        <%if (errors?.ciudad) {%>
+
+                                            <div class="error-label">
+                                                Por favor ingrese una ciudad
+                                            </div>
+                                            <% } %>
+                                    </div>
+                                    <div class="mt-2">
+                                        <label>Edad</label>
+                                        <input required class="form-control" type="number" name="edad"
+                                            placeholder="Edad" value="<%=persona && persona.edad %>">
+                                        <%if (errors?.edad) {%>
+
+                                            <div class="error-label">
+                                                Por favor ingrese una edad
+                                            </div>
+                                            <% } %>
+                                    </div>
+                                    <div class="mt-2">
+                                        <label>Fecha de Nacimiento</label>
+                                        <input required class="form-control" type="date" name="fechaNacimiento"
+                                            placeholder="Fecha de Nacimiento" value="<%=persona && fechaFormateada %>">
+                                        <%if (errors?.fechaNacimiento) {%>
+
+                                            <div class="error-label">
+                                                Por favor ingrese una fecha
+                                            </div>
+                                            <% } %>
+                                    </div>
+                                    <div class="mt-2">
+                                        <label>Género</label>
+                                        <select required name="genero" class="form-select">
+                                            <option value="1" <%=(persona && persona.genero==1) && "selected" %>
+                                                >Masculino
+                                            </option>
+                                            <option value="0" <%=(persona && persona.genero==0) && "selected" %>
+                                                >Femenino
+                                            </option>
+                                            <option value="-1" <%=(persona && persona.genero==-1) && "selected" %>
+                                                >Indefinido
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="mt-2">
+                                        <label>Usuario</label>
+                                        <select required name="usuarioId" class="form-select">
+                                            <option value="">Seleccione un usuario</option>
+                                            <% usuarios.forEach(usuario=> { %>
+                                                <option value="<%=usuario.id %>" <%=(persona &&
+                                                    persona.usuarioId==usuario.id) && "selected" %>>
+                                                    <%=usuario.email %>
+                                                </option>
+                                                <% }) %>
+
+                                        </select>
+                                        <%if (errors?.usuarioId) {%>
+                                            <div class="error-label">
+                                                Por favor seleccione un usuario
+                                            </div>
+                                            <% } %>
+                                    </div>
+                                    <div class="mt-2">
+                                        <input class="btn btn-primary" type="submit" value="Enviar">
+                                    </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../../components/footer.ejs') %>

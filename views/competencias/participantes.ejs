@@ -1,0 +1,39 @@
+<%- include('../../components/header.ejs') %>
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6 col-md-8 col-sm-10 col-xxl-4">
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Formulario de participantes</h5>
+                        <form method="post" action="/competencias/<%=competencia.id%>/participantes">
+                            <div class="mt-2">
+                                <label>Participantes</label>
+                                <!-- <select class="form-select" name="persona_id" multiple>
+                                    <% mascotas.forEach(mascota=> { %>
+                                        <option value="<%= mascota.id %>">
+                                            <%= mascota.nombre %>
+                                        </option>
+                                        <% }) %>
+                                </select> -->
+                                <% mascotas.forEach(mascota=> { %>
+                                    <div>
+                                        <input id="mascota<%=mascota.id%>" type="checkbox" name="mascotas"
+                                            <%=competencia.mascotas.find(m=>m.id==mascota.id) && "checked" %> value="
+                                        <%= mascota.id %>" />
+                                            <label for="mascota<%=mascota.id%>">
+                                                <%= mascota.nombre %>
+                                            </label>
+                                    </div>
+                                    <% }) %>
+                                        <div class="mt-2">
+                                            <input class="btn btn-primary" type="submit" value="Guardar">
+                                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../../components/footer.ejs') %>

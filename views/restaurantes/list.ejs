@@ -1,0 +1,52 @@
+<%- include('../../components/header.ejs') %>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h3>Lista de Restaurantes</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table ">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% restaurantes.forEach(restaurante=> { %>
+                                        <tr>
+                                        
+                                            <td>
+                                                <%= restaurante.id %>
+                                            </td>
+                                            <td>
+                                                <a href="/hamburguesas/restaurante/<%= restaurante.id %>"><%= restaurante.rnombre %></a>
+                                            </td>
+                                            
+                                            <td><a class="btn btn-primary"
+                                                    href="/restaurantes/<%= restaurante.id %>/edit">Editar</a></td>
+                                            <td>
+                                                <form method="post" action="/restaurantes/<%= restaurante.id %>/delete"
+                                                    onsubmit="return confirm('Está seguro que desea eliminar?')">
+                                                    <input class="btn btn-danger" type="submit" value="Eliminar">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../../components/footer.ejs') %>

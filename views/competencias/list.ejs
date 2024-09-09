@@ -1,0 +1,91 @@
+<%- include('../../components/header.ejs') %>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <div class="card-title">
+                            <h3>Lista de Competencias</h3>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table ">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Nombre</th>
+                                        <th>Fecha</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% competencias.forEach(competencia=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= competencia.id %>
+                                            </td>
+                                            <td>
+                                                <%= competencia.nombre %>
+                                            </td>
+                                            <td>
+                                                <%= competencia.fecha %>
+                                            </td>
+                                            <td><a class="btn btn-success"
+                                                    href="/competencias/<%= competencia.id %>/participantes">Participantes</a>
+                                            </td>
+                                            <td><a class="btn btn-primary"
+                                                    href="/competencias/<%= competencia.id %>/edit">Editar</a></td>
+                                            <td>
+                                                <form method="post" action="/competencias/<%= competencia.id %>/delete"
+                                                    onsubmit="return confirm('Está seguro que desea eliminar?')">
+                                                    <input class="btn btn-danger" type="submit" value="Eliminar">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="6">
+                                                <div class="accordion" id="competencia<%=competencia.id%>">
+                                                    <div class="accordion-item">
+                                                        <h2 class="accordion-header">
+                                                            <button class="accordion-button collapsed" type="button"
+                                                                data-bs-toggle="collapse"
+                                                                data-bs-target="#collapse<%=competencia.id%>"
+                                                                aria-expanded="true" aria-controls="collapseOne">
+                                                                Participantes
+                                                            </button>
+                                                        </h2>
+                                                        <div id="collapse<%=competencia.id%>"
+                                                            class="accordion-collapse collapse"
+                                                            data-bs-parent="#competencia<%=competencia.id%>">
+                                                            <div class="accordion-body">
+                                                                <%if (competencia.mascotas.length>0) { %>
+                                                                    <ul>
+                                                                        <% competencia.mascotas.forEach(mascota=> { %>
+                                                                            <li>
+                                                                                <%= mascota.nombre %>
+                                                                            </li>
+                                                                            <% }) %>
+                                                                    </ul>
+                                                                    <%} else { %>
+                                                                        <p>No hay participantes</p>
+                                                                        <% } %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                        <% }) %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('../../components/footer.ejs') %>
